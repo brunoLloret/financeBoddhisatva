@@ -1,0 +1,218 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: black; /* Blue color */
+    color: gold;
+    border: green;
+    border-style: solid;
+    border-color: green;
+    border-width: 3px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size */
+    font-weight: lighter;
+    font-family: monospace; /* Consistent font family */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+  }
+  
+  button:hover {
+    background-color: darkgreen; /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  button:active {
+    background-color: green; /* Even darker blue on click */
+    transform: scale(1); /* Reset zoom effect */
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 5px 0;
+  }
+  
+  /* styles/globals.css */
+  #threejs-canvas {
+    position: relative;
+    z-index: 0;
+  }
+  
+  #controls {
+    position: relative;
+    z-index: 1;
+  }
+  
+  button, input[type="range"] {
+    z-index: 2;
+  }
+  
+  /* styles.css */
+  .ascii-background {
+    background-color: black;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    line-height: 12px;
+    white-space: pre;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .ascii-background span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+  }
+  
+  /* styles/globals.css */
+  .video-mask {
+    position: relative;
+    width: 360px; /* Diameter of the circle */
+    height: 360px; /* Diameter of the circle */
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  
+  .video-mask iframe {
+    position: absolute;
+    top: -90px; /* Center the iframe */
+    left: -90px; /* Center the iframe */
+    width: 640px; /* Width of the iframe */
+    height: 360px; /* Height of the iframe */
+  }
+  
+  /* PoemLaoTzu.css */
+  .poem-container {
+    position: absolute;
+    top: 100px; /* Adjust as needed to position above Buddha's head */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    color: #FFD700; /* Gold color */
+  }
+  
+  .poem-column {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px; /* Adjust spacing between columns */
+    align-items: center;
+  }
+  
+  .poem-char {
+    font-size: 25px; /* Adjust font size if needed */
+    color: #FFD700; /* Gold color */
+    font-weight: none; /* Make the text bold */
+    text-shadow: 
+        0 0 5px #FFD700, 
+        0 0 10px #FFD700, 
+        0 0 20px #FFD700, 
+        0 0 30px #FFA500, 
+        0 0 40px #FFA500, 
+        0 0 50px #FFA500, 
+        0 0 60px #FFA500; /* Add glow effect */
+    animation: holo-glow 1.5s infinite alternate, glitch 2s infinite; /* Add animation for holographic effect and glitch */
+  }
+  
+  /* Keyframes for the holographic glow effect */
+  @keyframes holo-glow {
+    0% {
+        text-shadow: 
+            0 0 5px #FFD700, 
+            0 0 10px #FFD700, 
+            0 0 20px #FFD700, 
+            0 0 30px #FFA500, 
+            0 0 40px #FFA500, 
+            0 0 50px #FFA500, 
+            0 0 60px #FFA500;
+        color: #FFD700; /* Gold color */
+    }
+    50% {
+        text-shadow: 
+            0 0 10px #00FF00, 
+            0 0 20px #00FF00, 
+            0 0 30px #00FF00, 
+            0 0 40px #00FF00, 
+            0 0 50px #00FF00, 
+            0 0 60px #00FF00;
+        color: #00FF00; /* Green color */
+    }
+    100% {
+        text-shadow: 
+            0 0 5px #FFD700, 
+            0 0 10px #FFD700, 
+            0 0 20px #FFD700, 
+            0 0 30px #FFA500, 
+            0 0 40px #FFA500, 
+            0 0 50px #FFA500, 
+            0 0 60px #FFA500;
+        color: #FFD700; /* Gold color */
+    }
+  }
+  
+  /* Keyframes for the glitch effect */
+  @keyframes glitch {
+    0% {
+        clip: rect(0, 900px, 0, 0);
+        transform: skew(0.02deg);
+    }
+    10% {
+        clip: rect(0, 900px, 50px, 0);
+        transform: skew(0.03deg);
+    }
+    20% {
+        clip: rect(0, 900px, 20px, 0);
+        transform: skew(0.01deg);
+    }
+    30% {
+        clip: rect(0, 900px, 60px, 0);
+        transform: skew(0.02deg);
+    }
+    40% {
+        clip: rect(0, 900px, 30px, 0);
+        transform: skew(0.01deg);
+    }
+    50% {
+        clip: rect(0, 900px, 40px, 0);
+        transform: skew(0.03deg);
+    }
+    60% {
+        clip: rect(0, 900px, 10px, 0);
+        transform: skew(0.02deg);
+    }
+    70% {
+        clip: rect(0, 900px, 70px, 0);
+        transform: skew(0.03deg);
+    }
+    80% {
+        clip: rect(0, 900px, 40px, 0);
+        transform: skew(0.01deg);
+    }
+    90% {
+        clip: rect(0, 900px, 30px, 0);
+        transform: skew(0.02deg);
+    }
+    100% {
+        clip: rect(0, 900px, 60px, 0);
+        transform: skew(0.03deg);
+    }
+  }
+  

@@ -1,0 +1,22 @@
+/* Reset default margin and padding */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+/* Ensure the div in App component takes the full viewport */
+.fullscreen-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Prevent scrolling */
+}
