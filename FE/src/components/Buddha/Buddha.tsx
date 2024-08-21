@@ -6,13 +6,14 @@ import * as THREE from "three";
 import CylindricalStrings from "./CylindricalStrings";
 import LaoTzuPoem from "./LaoTzuPoem";
 import CylindricalGraph from "./CylindricalGraph";
-import styles from "../../global.css";
+import "../../global.css";
 
 type BuddhaModelProps = {
   position: [number, number, number];
   rotationSpeed: number;
   scale?: number;
   isGolden: boolean;
+  isNeon: boolean;
   color: string;
 };
 
@@ -21,14 +22,15 @@ const BuddhaModel = ({
   rotationSpeed,
   scale = 0.1,
   isGolden,
+  isNeon,
 }: BuddhaModelProps) => {
   const obj = useRef<THREE.Group>(null);
   const object = useLoader(FBXLoader, "/quan+am+bo+tac.fbx");
 
   useEffect(() => {
     if (obj.current) {
-      obj.current.position.set(position[0], position[1], position[2]);
-      obj.current.scale.set(scale, scale, scale);
+      obj.current.position.set(position[0], position[0], position[0]);
+      obj.current.scale.set(0.15, 0.15, 0.15);
       obj.current.rotation.set(-Math.PI / 2, 0, 0);
 
       const goldenMaterial = new THREE.MeshStandardMaterial({
@@ -37,7 +39,6 @@ const BuddhaModel = ({
         color: new THREE.Color(0xffd700),
         metalness: 0.9,
         roughness: 0.1,
-        transmission: 1.0,
         opacity: 0.5,
         clearcoat: 1.0,
         clearcoatRoughness: 0.1,
@@ -48,20 +49,43 @@ const BuddhaModel = ({
         color: new THREE.Color(0x000000),
         metalness: 0.9,
         roughness: 0.9,
-        transmission: 1.0,
         opacity: 0.5,
         clearcoat: 1.0,
         clearcoatRoughness: 0.1,
         reflectivity: 1.0,
       });
 
+      const neonMaterial = new THREE.MeshStandardMaterial({
+        emissive: new THREE.Color(0x00ff00), // Neon green color
+        emissiveIntensity: 1.5, // Increased emissive intensity for glow effect
+        color: new THREE.Color(0x00ff00),
+        metalness: 0.5,
+        roughness: 0.3,
+        opacity: 0.5,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        reflectivity: 0.5,
+      });
+
       obj.current.traverse((child: any) => {
         if (child.isMesh) {
-          child.material = isGolden ? goldenMaterial : blackMaterial;
+          child.material = isNeon
+            ? neonMaterial
+            : isGolden
+              ? goldenMaterial
+              : new THREE.MeshPhysicalMaterial({
+                  color: new THREE.Color(0x000000),
+                  metalness: 0.9,
+                  roughness: 0.9,
+                  opacity: 0.5,
+                  clearcoat: 1.0,
+                  clearcoatRoughness: 0.1,
+                  reflectivity: 1.0,
+                });
         }
       });
     }
-  }, [object, position, scale, isGolden]);
+  }, [isGolden, isNeon]);
 
   useFrame(() => {
     if (obj.current) {
@@ -76,15 +100,17 @@ const Scene = ({
   lightIntensity,
   rotationSpeed,
   isGolden,
+  isNeon,
 }: {
   lightIntensity: number;
   rotationSpeed: number;
   isGolden: boolean;
+  isNeon: boolean;
 }) => {
   const { camera } = useThree();
 
   useEffect(() => {
-    camera.position.set(90, 2, 10);
+    camera.position.set(0, 0, 100);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
   }, [camera]);
 
@@ -99,6 +125,8 @@ const Scene = ({
           position={[0, 0, 0]}
           rotationSpeed={rotationSpeed}
           isGolden={isGolden}
+          isNeon={isNeon}
+          color={""}
         />
         <CylindricalGraph />
       </Suspense>
@@ -117,23 +145,30 @@ const Buddha = () => {
   const toggleMaterial = () => setIsGolden((prev) => !prev);
 
   return (
-    <div className={styles.buddhaPage}>
+    <div>
       <CylindricalStrings />
-      <Canvas className={styles.canvas}>
+      <Canvas
+        style={{
+          width: "100vw", // Full viewport width
+          height: "100vh", // Full viewport height
+          display: "block",
+        }}
+      >
         <Scene
           lightIntensity={lightIntensity}
           rotationSpeed={rotationSpeed}
           isGolden={isGolden}
+          isNeon={isNeon} // Pass the neon state here
         />
       </Canvas>
-      <div className={styles.controls}>
+      <div className="controls">
         <label htmlFor="lightIntensity">Light Intensity: </label>
         <input
           id="lightIntensity"
           type="range"
-          min="0"
-          max="5"
-          step="0.1"
+          min="3"
+          max="20"
+          step="6"
           value={lightIntensity}
           onChange={(e) => setLightIntensity(parseFloat(e.target.value))}
         />
@@ -149,11 +184,13 @@ const Buddha = () => {
           onChange={(e) => setRotationSpeed(parseFloat(e.target.value))}
         />
         <br />
-        <button onClick={toggleMaterial}>
+        <button className="button" onClick={toggleMaterial}>
           {isGolden ? "Switch to Black" : "Switch to Golden"}
         </button>
         <br />
-        <button onClick={toggleNeon}>Toggle Neon Words</button>
+        <button className="button" onClick={toggleNeon}>
+          Toggle Neon Effect
+        </button>
         <div>
           <p>Light Intensity: {lightIntensity}</p>
           <p>Rotation Speed: {rotationSpeed}</p>
