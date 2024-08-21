@@ -6,7 +6,7 @@ import * as THREE from "three";
 import CylindricalStrings from "./CylindricalStrings";
 import LaoTzuPoem from "./LaoTzuPoem";
 import CylindricalGraph from "./CylindricalGraph";
-import styles from "../../global.css"; // Adjust the path as needed
+import styles from "../../global.css";
 
 type BuddhaModelProps = {
   position: [number, number, number];
