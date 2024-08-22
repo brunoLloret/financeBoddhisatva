@@ -129,6 +129,7 @@ body {
   }
   
   .poem-char {
+    font-family: "ZCOOL KuaiLe"; /* Use custom font */
     font-size: 25px; /* Adjust font size if needed */
     color: #FFD700; /* Gold color */
     font-weight: none; /* Make the text bold */
@@ -143,14 +144,53 @@ body {
     animation: holo-glow 1.5s infinite alternate, glitch 2s infinite; /* Add animation for holographic effect and glitch */
   }
   
+
+
+ @keyframes holo-glow {
+  0%, 100% {
+      text-shadow: 
+          0 0 5px #FF00FF, 
+          0 0 10px #FF00FF, 
+          0 0 20px #FF00FF, 
+          0 0 30px #FF00FF, 
+          0 0 40px #FF00FF, 
+          0 0 50px #FF00FF, 
+          0 0 60px #FF00FF;
+      color: #FF00FF; /* Fuchsia */
+  }
+  33% {
+      text-shadow: 
+          0 0 5px #00FFFF, 
+          0 0 10px #00FFFF, 
+          0 0 20px #00FFFF, 
+          0 0 30px #00FFFF, 
+          0 0 40px #00FFFF, 
+          0 0 50px #00FFFF, 
+          0 0 60px #00FFFF;
+      color: #00FFFF; /* Cyan */
+  }
+  66% {
+      text-shadow: 
+          0 0 5px #FFFF00, 
+          0 0 10px #FFFF00, 
+          0 0 20px #FFFF00, 
+          0 0 30px #FFFF00, 
+          0 0 40px #FFFF00, 
+          0 0 50px #FFFF00, 
+          0 0 60px #FFFF00;
+      color: #FFFF00; /* Yellow */
+  }
+}
+
+
   /* Keyframes for the holographic glow effect */
   @keyframes holo-glow {
     0% {
         text-shadow: 
             0 0 5px #FFD700, 
             0 0 10px #FFD700, 
-            0 0 20px #FFD700, 
-            0 0 30px #FFA500, 
+            0 0 20px #FF00FF, 
+            0 0 30px #FF00FF, 
             0 0 40px #FFA500, 
             0 0 50px #FFA500, 
             0 0 60px #FFA500;
@@ -172,12 +212,31 @@ body {
             0 0 10px #FFD700, 
             0 0 20px #FFD700, 
             0 0 30px #FFA500, 
-            0 0 40px #FFA500, 
-            0 0 50px #FFA500, 
+            0 0 40px #FF00FF, 
+            0 0 50px #FF00FF, 
             0 0 60px #FFA500;
         color: #FFD700; /* Gold color */
     }
   }
+
+
+  
+  /* In Home.module.css or LaoTzuPoem.css */
+
+.poem-line-class1 {
+  font-family: "Zhi Mang Xing", cursive;
+}
+
+.poem-line-class2 {
+  font-family: "ZCool KuaiLe", sans-serif;
+}
+
+.poem-line-class3 {
+  font-family: "Monospace";
+}
+
+
+
   
   /* Keyframes for the glitch effect */
   @keyframes glitch {
@@ -189,11 +248,11 @@ body {
         clip: rect(0, 900px, 50px, 0);
         transform: skew(0.03deg);
     }
-    20% {
+    /* 20% {
         clip: rect(0, 900px, 20px, 0);
         transform: skew(0.01deg);
-    }
-    30% {
+    } */
+    /* 30% {
         clip: rect(0, 900px, 60px, 0);
         transform: skew(0.02deg);
     }
@@ -208,8 +267,8 @@ body {
     60% {
         clip: rect(0, 900px, 10px, 0);
         transform: skew(0.02deg);
-    }
-    70% {
+    } */
+    /* 70% {
         clip: rect(0, 900px, 70px, 0);
         transform: skew(0.03deg);
     }
@@ -220,10 +279,21 @@ body {
     90% {
         clip: rect(0, 900px, 30px, 0);
         transform: skew(0.02deg);
-    }
+    } */
     100% {
         clip: rect(0, 900px, 60px, 0);
         transform: skew(0.03deg);
     }
   }
   
+  .zhi-mang-xing-regular {
+    font-family: "Zhi Mang Xing", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .zcool-kuaile-regular {
+    font-family: "ZCOOL KuaiLe", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }

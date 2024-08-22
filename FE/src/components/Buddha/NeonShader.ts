@@ -14,7 +14,7 @@ const vertexShader = `
 // Fragment Shader
 const fragmentShader = `
   varying vec2 vUv;
-  
+
   uniform float time;
   uniform vec3 color1;
   uniform vec3 color2;
@@ -39,7 +39,7 @@ export const NeonShaderMaterial = (
       color2: { value: color2 },
     },
     side: THREE.FrontSide,
-    transparent: true,
+    transparent: false,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
   });
