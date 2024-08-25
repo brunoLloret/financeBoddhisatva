@@ -1,0 +1,153 @@
+API_KEY=FN9OX942RAOTYCTD
+
+
+
+Global Market Open & Close Status Utility
+
+This endpoint returns the current market status (open vs. closed) of major trading venues for equities, forex, and cryptocurrencies around the world.
+
+
+API Parameters
+❚ Required: function
+
+The API function of your choice. In this case, function=MARKET_STATUS
+
+❚ Required: apikey
+
+Your API key. Claim your free API key here.
+
+
+Examples (click for JSON output)
+https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=demo
+
+
+Language-specific guides
+ NodeJS
+
+'use strict';
+var request = require('request');
+
+// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+var url = 'https://www.alphavantage.co/query?function=MARKET_STATUS&apikey=demo';
+
+request.get({
+    url: url,
+    json: true,
+    headers: {'User-Agent': 'request'}
+  }, (err, res, data) => {
+    if (err) {
+      console.log('Error:', err);
+    } else if (res.statusCode !== 200) {
+      console.log('Status:', res.statusCode);
+    } else {
+      // data is successfully parsed as a JSON object:
+      console.log(data);
+    }
+});
+
+
+
+
+
+Fundamental Data
+We offer the following set of fundamental data APIs in various temporal dimensions covering key financial metrics, income statements, balance sheets, cash flow, and other fundamental data points.
+
+
+Company Overview
+This API returns the company information, financial ratios, and other key metrics for the equity specified. Data is generally refreshed on the same day a company reports its latest earnings and financials.
+
+
+API Parameters
+❚ Required: function
+
+The function of your choice. In this case, function=OVERVIEW
+
+❚ Required: symbol
+
+The symbol of the ticker of your choice. For example: symbol=IBM.
+
+❚ Required: apikey
+
+Your API key. Claim your free API key here.
+
+
+Example (click for JSON output)
+https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
+
+
+Language-specific guides
+Python NodeJS PHP C#/.NET Other
+
+'use strict';
+var request = require('request');
+
+// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+var url = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo';
+
+request.get({
+    url: url,
+    json: true,
+    headers: {'User-Agent': 'request'}
+  }, (err, res, data) => {
+    if (err) {
+      console.log('Error:', err);
+    } else if (res.statusCode !== 200) {
+      console.log('Status:', res.statusCode);
+    } else {
+      // data is successfully parsed as a JSON object:
+      console.log(data);
+    }
+});
+
+
+
+BALANCE_SHEET Trending
+This API returns the annual and quarterly balance sheets for the company of interest, with normalized fields mapped to GAAP and IFRS taxonomies of the SEC. Data is generally refreshed on the same day a company reports its latest earnings and financials.
+
+
+API Parameters
+❚ Required: function
+
+The function of your choice. In this case, function=BALANCE_SHEET
+
+❚ Required: symbol
+
+The symbol of the ticker of your choice. For example: symbol=IBM.
+
+❚ Required: apikey
+
+Your API key. Claim your free API key here.
+
+
+Example - annual & quarterly balance sheets for IBM (click for JSON output)
+https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=IBM&apikey=demo
+
+
+Language-specific guides
+Python NodeJS PHP C#/.NET Other
+
+'use strict';
+var request = require('request');
+
+// replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+var url = 'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=IBM&apikey=demo';
+
+request.get({
+    url: url,
+    json: true,
+    headers: {'User-Agent': 'request'}
+  }, (err, res, data) => {
+    if (err) {
+      console.log('Error:', err);
+    } else if (res.statusCode !== 200) {
+      console.log('Status:', res.statusCode);
+    } else {
+      // data is successfully parsed as a JSON object:
+      console.log(data);
+    }
+});
+
+
+
+
+
