@@ -250,7 +250,7 @@ const BuddhaModel = React.memo(
         obj.current.scale.set(scale, scale, scale);
         obj.current.rotation.set(-Math.PI / 2, 0, 0);
       }
-    }, [position, scale]);
+    }, [scale]);
 
     useFrame((state, delta) => {
       if (obj.current) {
@@ -300,7 +300,7 @@ const MaterialUpdater = React.memo(({ isGolden, isNeon, isAds }) => {
             : blackMaterial;
       }
     });
-  }, [isGolden, isNeon, scene]);
+  }, [isGolden, isNeon, scene, isAds]);
 
   return null;
 });
@@ -339,8 +339,8 @@ const Scene = React.memo(
             rotationSpeed={rotationSpeed}
             scale={0.1}
           />
-          <MaterialUpdater isAds={isAds} isGolden={isGolden} isNeon={isNeon} />
-          {/* <CylindricalGraph /> */}
+          {/* <CylindricalGraph isAds={isAds} /> */}
+          <MaterialUpdater isGolden={isGolden} isNeon={isNeon} />
         </Suspense>
         <OrbitControls />
       </>
@@ -402,9 +402,9 @@ const Buddha = () => {
           <button className="button" onClick={toggleNeon}>
             氖
           </button>
-          <button className="button" onClick={toggleAds}>
+          {/* <button className="button" onClick={toggleAds}>
             {isAds ? "Premium No Ads Free Trial" : "Enable Ads"}
-          </button>
+          </button> */}
         </div>
       </div>
       {isNeon && <LaoTzuPoem />}
