@@ -1,3 +1,17 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node",
+        "config": {
+          "installCommand": "npm install --no-package-lock --force && npm dedupe",
+          "buildCommand": "npm run build"
+        }
+      }
+    ],
+    "routes": [
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.html" }
+    ]
   }
