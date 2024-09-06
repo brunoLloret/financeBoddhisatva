@@ -190,7 +190,7 @@
 //           {isNasdaq ? "HK-China" : "Nasdaq"}
 //         </button>
 //         <button className="button" onClick={toggleMaterial}>
-//           {isGolden ? "Black" : "Jade"}
+//           {isGolden ? "珍珠黑" : "玉"}
 //         </button>
 //         <br />
 //         <button className="button" onClick={toggleNeon}>
@@ -396,7 +396,7 @@ const Buddha = () => {
             {isNasdaq ? "HK-China" : "Nasdaq"}
           </button>
           <button className="button" onClick={toggleMaterial}>
-            {isGolden ? "Black" : "Jade"}
+            {isGolden ? "珍珠黑" : "玉"}
           </button>
           <br />
           <button className="button" onClick={toggleNeon}>
