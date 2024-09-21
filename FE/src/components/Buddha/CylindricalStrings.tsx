@@ -37,7 +37,7 @@ const CylindricalStrings: React.FC<CylindricalStringsProps> = ({
 
     function animate() {
       const time = Date.now() * speed;
-      console.log("Animating at time:", time);
+      // console.log("Animating at time:", time);
 
       stringRefs.current.forEach((ref, index) => {
         if (ref) {
