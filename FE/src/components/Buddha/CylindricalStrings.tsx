@@ -46,7 +46,7 @@ const CylindricalStrings: React.FC<CylindricalStringsProps> = ({
           const z = radius * Math.sin(angle + time);
           const y = height * (Math.sin(angle + time) / 1);
 
-          console.log(`Positioning ${indicators[index].name}:`, { x, y, z });
+          // console.log(`Positioning ${indicators[index].name}:`, { x, y, z });
 
           ref.style.transform = `translate3d(${x}rem, ${y}rem, ${z}rem)`;
         }
