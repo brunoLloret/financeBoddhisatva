@@ -143,8 +143,8 @@
 
 // CLEAN VERSION IMAGE
 
-import React, { useRef, useMemo, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, useMemo, useEffect } from "react";
+import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 // Import images
@@ -161,7 +161,11 @@ import { useState } from "react";
 
 const images = [image1, image2, image3, image4, image5];
 
-const CylindricalGraph = ({ isAds }) => {
+interface CylindricalGraphProps {
+  isAds: boolean;
+}
+
+const CylindricalGraph: React.FC<CylindricalGraphProps> = ({ isAds }) => {
   const cylinderRef = useRef<THREE.Mesh>(null);
   const textureRef = useRef<THREE.CanvasTexture | null>(null);
   const shaderMaterialRef = useRef<THREE.ShaderMaterial>(null);

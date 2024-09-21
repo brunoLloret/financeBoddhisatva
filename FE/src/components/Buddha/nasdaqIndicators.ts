@@ -1,4 +1,13 @@
-export const nasdaqIndicators: Indicators[] = [
+
+
+interface NasdaqIndicators {
+    name: string;
+    price: number;
+    change: number;
+    changePercent: string;
+}
+
+export const nasdaqIndicators: NasdaqIndicators[] = [
     {
         name: "AAPL",
         price: 220.27,

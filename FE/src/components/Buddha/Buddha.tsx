@@ -218,7 +218,7 @@ import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import CylindricalStrings from "./CylindricalStrings";
 import LaoTzuPoem from "./LaoTzuPoem";
-import CylindricalGraph from "./CylindricalGraph";
+// import CylindricalGraph from "./CylindricalGraph";
 import { NeonShaderMaterial } from "./NeonShader";
 import { nasdaqIndicators } from "./nasdaqIndicators";
 import { hkChinaIndicators } from "./hkChinaIndicators";
@@ -252,7 +252,7 @@ const BuddhaModel = React.memo(
       }
     }, [scale]);
 
-    useFrame((state, delta) => {
+    useFrame(() => {
       if (obj.current) {
         obj.current.rotation.z += rotationSpeed;
       }
@@ -263,47 +263,59 @@ const BuddhaModel = React.memo(
 );
 
 // MaterialUpdater component
-const MaterialUpdater = React.memo(({ isGolden, isNeon, isAds }) => {
-  const { scene } = useThree();
+const MaterialUpdater = React.memo(
+  ({
+    isGolden,
+    isNeon /* , isAds */,
+  }: {
+    isGolden: boolean;
+    isNeon: boolean;
+    // isAds: boolean;
+  }) => {
+    const { scene } = useThree();
 
-  useEffect(() => {
-    const neonMaterial = NeonShaderMaterial(
-      new THREE.Color(0xffd700),
-      new THREE.Color(0x00ff00)
-    );
+    useEffect(() => {
+      const neonMaterial = NeonShaderMaterial(
+        new THREE.Color(0xffd700),
+        new THREE.Color(0x00ff00)
+      );
 
-    const goldenMaterial = new THREE.MeshStandardMaterial({
-      emissive: new THREE.Color(0x005c3a),
-      emissiveIntensity: 1,
-      color: new THREE.Color(0xffd700),
-      metalness: 0.9,
-      roughness: 0.1,
-      opacity: 0.5,
-    });
+      const goldenMaterial = new THREE.MeshStandardMaterial({
+        emissive: new THREE.Color(0x005c3a),
+        emissiveIntensity: 1,
+        color: new THREE.Color(0xffd700),
+        metalness: 0.9,
+        roughness: 0.1,
+        opacity: 0.5,
+      });
 
-    const blackMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(0x000000),
-      metalness: 0.9,
-      roughness: 0.9,
-      opacity: 0.5,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
-      reflectivity: 1.0,
-    });
+      const blackMaterial = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(0x000000),
+        metalness: 0.9,
+        roughness: 0.9,
+        opacity: 0.5,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.1,
+        reflectivity: 1.0,
+      });
 
-    scene.traverse((child: any) => {
-      if (child.isMesh) {
-        child.material = isNeon
-          ? neonMaterial
-          : isGolden
-            ? goldenMaterial
-            : blackMaterial;
-      }
-    });
-  }, [isGolden, isNeon, scene, isAds]);
-
-  return null;
-});
+      scene.traverse((child: any) => {
+        if (child.isMesh) {
+          child.material = isNeon
+            ? neonMaterial
+            : isGolden
+              ? goldenMaterial
+              : blackMaterial;
+          // Commented out ads functionality:
+          // : isAds
+          //   ? adsMaterial
+          //   : blackMaterial;
+        }
+      });
+    }, [isGolden, isNeon, /* isAds, */ scene]);
+    return null;
+  }
+);
 
 // Scene component
 const Scene = React.memo(
@@ -312,13 +324,13 @@ const Scene = React.memo(
     rotationSpeed,
     isGolden,
     isNeon,
-    isAds,
+    // isAds,
   }: {
     lightIntensity: number;
     rotationSpeed: number;
     isGolden: boolean;
     isNeon: boolean;
-    isAds: boolean;
+    // isAds: boolean;
   }) => {
     const { camera } = useThree();
 
@@ -340,7 +352,10 @@ const Scene = React.memo(
             scale={0.1}
           />
           {/* <CylindricalGraph isAds={isAds} /> */}
-          <MaterialUpdater isGolden={isGolden} isNeon={isNeon} />
+          <MaterialUpdater
+            isGolden={isGolden}
+            isNeon={isNeon} /* isAds={isAds} */
+          />
         </Suspense>
         <OrbitControls />
       </>
@@ -356,12 +371,12 @@ const Buddha = () => {
   const [isNeon, setIsNeon] = useState(false);
   const [isNasdaq, setIsNasdaq] = useState(true);
   const [indicatorsData, setIndicatorsData] = useState<Indicators[]>([]);
-  const [isAds, setIsAds] = useState(true);
+  // const [isAds, setIsAds] = useState(true);
 
   const toggleNeon = useCallback(() => setIsNeon((prev) => !prev), []);
   const toggleMaterial = useCallback(() => setIsGolden((prev) => !prev), []);
   const toggleIndicators = useCallback(() => setIsNasdaq((prev) => !prev), []);
-  const toggleAds = useCallback(() => setIsAds((prev) => !prev), []);
+  // const toggleAds = useCallback(() => setIsAds((prev) => !prev), []);
 
   const fetchIndicators = useCallback(async () => {
     try {
@@ -387,7 +402,7 @@ const Buddha = () => {
           rotationSpeed={rotationSpeed}
           isGolden={isGolden}
           isNeon={isNeon}
-          isAds={isAds} // Pass isAds to Scene
+          // isAds={isAds}
         />
       </Canvas>
       <div className="controls">
